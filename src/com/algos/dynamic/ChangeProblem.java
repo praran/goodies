@@ -19,7 +19,7 @@ public class ChangeProblem {
          int[] coins = {1,2,3};
 
 
-        System.out.println(getChange(coins, coins.length, 4));
+        System.out.println(getChangeCombo(coins, coins.length, 4));
     }
 
     // http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/
@@ -50,6 +50,30 @@ public class ChangeProblem {
         return table[amount][nofCoins -1];
     }
 
+
+    public static int getChangeCombo(int[] coins, int noOfcoins, int amount){
+        if(coins.length ==0 || amount ==0) return 0;
+
+        int[][] table = new int[amount+1][noOfcoins];
+
+        // rows = amount and cols = coins
+
+        // when amount ==0 set base as 1
+        for(int col=0; col < noOfcoins; col++){
+            table[0][col] = 1;
+        }
+
+        // for each amount compute the combinations
+        for(int row=1; row <= amount; row ++){
+            for(int col=0; col < noOfcoins; col++){
+                int sWithCoin = (coins[col] > row ) ?0 : table[row - coins[col]][col];
+                int sWithOutCoin = (col >=1) ? table[row][col-1]:0;
+                table[row][col] = sWithCoin + sWithOutCoin;
+            }
+        }
+
+        return table[amount][noOfcoins-1];
+    }
 
     // Naive recursion
     public static int getChangeCount(int[] coins, int nofCoins, int amount){
