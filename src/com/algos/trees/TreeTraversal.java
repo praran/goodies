@@ -136,4 +136,29 @@ public class TreeTraversal {
         if (root == null) return 0;
         return Math.max(recHeight(root.left) , recHeight(root.right)) + 1;
     }
+
+    public static Node LCA(Node root, Node a, Node b) {
+        if (root == null) {
+            return null;
+        }
+
+        // If the root is one of a or b, then it is the LCA
+        if (root == a || root == b) {
+            return root;
+        }
+
+        Node left = LCA(root.left, a, b);
+        Node right = LCA(root.right, a, b);
+
+        // If both nodes lie in left or right then their LCA is in left or right,
+        // Otherwise root is their LCA
+        if (left != null && right != null) {
+            return root;
+        }
+
+        return (left != null) ? left : right;
+    }
+
+    // kth min node
+    // http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/
 }
