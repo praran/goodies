@@ -1,16 +1,13 @@
 package com.algos.trees;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by pradeep on 12/09/2015.
  */
 public class TreeTraversal {
 
-    class Node<E> {
+    static class Node<E> {
         Node<E> left;
         Node<E> right;
         E key;
@@ -25,15 +22,45 @@ public class TreeTraversal {
     }
 
     public static void inOrder(Node node){
-       while(node != null){
+       if(node != null){
            inOrder(node.left);
            System.out.println(node.key);
-           inOrder(node.left);
+           inOrder(node.right);
        }
     }
 
+    public static void main(String... args){
+        Node<Integer> node0 = new TreeTraversal.Node(null, 2,null);
+        Node<Integer> node1 = new TreeTraversal.Node(null, 3,null);
+        Node<Integer> node = new TreeTraversal.Node(node0, 1,node1);
+       // inOrder(node);
+
+        System.out.println(recHeight(node));
+       itHeight(node);
+
+    }
+
+    public static void inOrder2(Node node){
+
+        Stack<Node> stack = new Stack<>();
+        Node curr = node;
+
+        while(!(curr== null && stack.isEmpty())){
+            if(curr == null){
+                curr = stack.pop();
+                System.out.println(curr.key);
+                curr= curr.right;
+            }else{
+                stack.push(curr);
+                curr = curr.left;
+
+            }
+        }
+
+    }
+
     public static void preOrder(Node node){
-        while(node != null){
+        if(node != null){
             System.out.println(node.key);
             inOrder(node.left);
             inOrder(node.left);
@@ -41,7 +68,7 @@ public class TreeTraversal {
     }
 
     public static void postOrder(Node node){
-        while(node != null){
+        if(node != null){
             inOrder(node.left);
             inOrder(node.left);
             System.out.println(node.key);
@@ -70,5 +97,43 @@ public class TreeTraversal {
                }
         }
          if(list.size()>0) levelOrder(list);
+    }
+
+
+    /**
+     * Height of the tree
+     * @param root
+     */
+    public static void itHeight(Node root)
+    {
+        Queue<Node> q = new LinkedList();
+        q.add(root);
+        int size = 0;
+        int height = 0;
+        while(!q.isEmpty())
+        {
+            size = q.size();
+            height++;
+            while(size != 0)
+            {
+                if(q.peek().left != null)
+                {
+                    q.add(q.peek().left);
+                }
+                if(q.peek().right != null)
+                {
+                    q.add(q.peek().right);
+                }
+                q.remove();
+                size--;
+            }
+        }
+        System.out.println("The height of the tree is = "+height);
+    }
+
+
+    public static int recHeight(Node root){
+        if (root == null) return 0;
+        return Math.max(recHeight(root.left) , recHeight(root.right)) + 1;
     }
 }

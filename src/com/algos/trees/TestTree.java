@@ -17,7 +17,8 @@ public class TestTree {
         Tree<Integer> tree = new Node(node1, 2, node2);
 
         System.out.println(tree.size());
-        levelOrder(tree);
+        inOrderTraverse(tree);
+        inOrderTraversal(tree);
 
     }
 
@@ -86,7 +87,7 @@ public class TestTree {
 
         while(!(cur ==null && stack.isEmpty())){
             if(cur instanceof Node){
-                if(cur == null){
+                if(cur instanceof Empty){
                     cur = stack.pop();
                     System.out.println(((Node)cur).key);
                     cur = ((Node) cur).right;
@@ -99,4 +100,6 @@ public class TestTree {
         }
 
     }
+
+
 }
