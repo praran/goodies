@@ -35,14 +35,16 @@ public class TreeTraversal {
         Node<Integer> node = new TreeTraversal.Node(node0, 1,node1);
        // inOrder(node);
 
-        System.out.println(recHeight(node));
-       itHeight(node);
+       /* System.out.println(recHeight(node));
+       itHeight(node);*/
+
+        System.out.println(findKthMinNode(node,5));
 
     }
 
     public static void inOrder2(Node node){
 
-        Stack<Node> stack = new Stack<>();
+        Stack<Node> stack = new Stack();
         Node curr = node;
 
         while(!(curr== null && stack.isEmpty())){
@@ -77,7 +79,7 @@ public class TreeTraversal {
 
     public static void levelOrder(Node node){
         if(node == null) return;
-        Queue<Node>  level = new LinkedList<>();
+        Queue<Node>  level = new LinkedList();
 
         while(!level.isEmpty()){
             Node cur = level.poll();
@@ -108,7 +110,7 @@ public class TreeTraversal {
     {
         Queue<Node> q = new LinkedList();
         q.add(root);
-        int size = 0;
+        int size ;
         int height = 0;
         while(!q.isEmpty())
         {
@@ -161,4 +163,30 @@ public class TreeTraversal {
 
     // kth min node
     // http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/
+
+    public static Integer findKthMinNode(Node<Integer> node, int k){
+        if(node ==null){
+            return null;
+        }
+
+        int n = k;
+
+        Stack<Node> stack = new Stack();
+        Node<Integer> curr = node;
+
+        while(!(curr == null && stack.isEmpty())){
+            if(curr == null){
+                curr  = stack.pop();
+                --n;
+                if(n == 0){
+                    return curr.key;
+                }
+                curr = curr.right;
+            }else{
+                stack.push(curr);
+                curr = curr.left;
+            }
+        }
+        return null;
+    }
 }

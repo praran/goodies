@@ -10,9 +10,9 @@ import java.util.Stack;
 public class TestTree {
 
     public static void main(String... args){
-        Node<Integer> node0 = new Node(new Empty<Integer>(), 4, new Empty<>());
-        Node<Integer> node1 = new Node(node0, 1, new Empty<>());
-        Node<Integer> node2 = new Node(new Empty<Integer>(), 3, new Empty<>());
+        Node<Integer> node0 = new Node(new Empty<Integer>(), 4, new Empty());
+        Node<Integer> node1 = new Node(node0, 1, new Empty());
+        Node<Integer> node2 = new Node(new Empty<Integer>(), 3, new Empty());
 
         Tree<Integer> tree = new Node(node1, 2, node2);
 
@@ -33,7 +33,7 @@ public class TestTree {
      public static void levelOrder(Tree node){
          if(node instanceof  Empty)
              System.out.println("");
-         Queue<Node> level = new LinkedList<>();
+         Queue<Node> level = new LinkedList();
          level.add((Node) node);
          while(!level.isEmpty()){
              Node n =level.poll();
