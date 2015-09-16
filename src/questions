@@ -1,13 +1,30 @@
 
-The question was: given and array of positive integers and another integer find whether there is a consecutive range in the array, so that the sum of integers in the range is equal to the given number.
-Given an array of integers return true if two of the numbers add to X
-Find Kth minimum node in a binary tree and suggest a complexity
-Reverse String Pair words that are Anagrams of each othe
-Phone interview questions: Given an array of numbers (1,2,3,8,0,2,2,0,10), move all 0s to the right end and all other numbers to the left while keeping relative order of non-zero numbers. Has to be linear in time and in-place.
-Phone interview Given a 2D array of gifts, find path from top left to bottom right corner with greatest aggregated gift values.
+1) The question was: given and array of positive integers and another integer
+ find whether there is a consecutive range in the array,
+ so that the sum of integers in the range is equal to the given number.
+
+
+2) Given an array of integers return true if two of the numbers add to X
+
+
+3) Find Kth minimum node in a binary tree and suggest a complexity
+
+4) Reverse String Pair words that are Anagrams of each other
+
+5) Phone interview questions: Given an array of numbers (1,2,3,8,0,2,2,0,10), move all 0s to the right end and all other numbers to the left while keeping relative order of non-zero numbers. Has to be linear in time and in-place.
+
+6) Phone interview Given a 2D array of gifts, find path from top left to bottom right corner with greatest aggregated gift values.
 Implement a method called printNonComments() which prints out a extract of text with comments removed. For example, the input: hello /* this is a multi line comment */ all Should produce: hello all You have access to a method called getNextLine() which returns the next line in the input string.
-Find lowest common ancestor (LCA).
-Given two unsorted arrays, one with event start times and one with end times, find out if any two events overlap.
+
+7) Find lowest common ancestor (LCA).
+
+8) Given two unsorted arrays, one with event start times and one with end times, find out if any two events overlap.
 http://www.geeksforgeeks.org/merging-intervals/
-  Binary Tree level order traversal 2. Given a string and a pattern '.' Matches any single character. '*' Matches zero or more of the preceding element.), find the first substring matching this pattern.
-Given an array of positive integers and a target integer, find if there is a consecutive subarray that sums to the target. E.g, given {5,6,4,12}, findsum(10)=true, findsum(11)=false
+  Binary Tree level order traversal 2. Given a string and a pattern '.' Matches any single character. '*' Matches zero or more of the preceding element.),
+
+9) find the first substring matching this pattern.
+
+10) Given an array of positive integers and a target integer, find if there is a consecutive subarray that sums to the target. E.g, given {5,6,4,12}, findsum(10)=true, findsum(11)=false
+
+
+http://se7so.blogspot.com/2014/02/how-to-prepare-for-interview-8.html

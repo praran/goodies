@@ -1,12 +1,17 @@
 package com.algos.sorting;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.*;
+
 /**
  * Created by pradeep on 12/09/2015.
  */
 public class QuickSort {
 
     public static void main(String... args){
-        int[] arr = {3,1,4,2,5};
+        int[] arr = {1,2,3,4,5};
 
         quickSort(arr, 0, arr.length-1);
 
@@ -73,11 +78,14 @@ public class QuickSort {
 
 
 
+
     public static int partiton(int[] arr, int low , int high){
 
         int i = low;
         int elem  = arr[low];
         int j     = high +1;
+
+
 
         while(true){
             // move to right
@@ -101,6 +109,7 @@ public class QuickSort {
         int temp = arr[low];
         arr[low] = arr[j];
         arr[j]  = temp;
+
 
 
         return j;
