@@ -19,7 +19,7 @@ public class Merge {
         // merge back to a[]
         int i = lo, j = mid+1;
         for (int k = lo; k <= hi; k++) {
-            if      (i > mid)              a[k] = aux[j++];
+            if      (i > mid)              a[k] = aux[j++] ;
             else if (j > hi)               a[k] = aux[i++];
             else if (less(aux[j], aux[i])) a[k] = aux[j++];
             else                           a[k] = aux[i++];
@@ -27,6 +27,32 @@ public class Merge {
 
         // postcondition: a[lo .. hi] is sorted
         assert isSorted(a, lo, hi);
+    }
+
+    private static void m(int[] arr, int[] temp, int l, int m, int h){
+        for(int i =0; i< arr.length; i++){
+            temp[i] = arr[i];
+        }
+
+        // take two pointer one for low and one for m + 1
+        int i = l;
+        int j = m +1;
+
+        for(int k =l; k <= h; k ++){
+            if(i > m)                  arr[k]  = temp[j++];
+            else if(j > h)             arr[k] = temp[i++];
+            else if(temp[j] < temp[i]) arr[k] = arr[j++];
+            else                       arr[k] = arr[i++];
+        }
+    }
+
+    private static void sort(int[] arr, int[] temp, int l, int h){
+        if( arr == null || arr.length ==0 || h <= l ) return;
+        int middle = (l + h )/2;//l + (h -l)/2;
+        sort(arr, temp, l, middle);
+        sort(arr, temp, middle+1, h);
+        m(arr, temp, l, middle, h);
+
     }
 
     // mergesort a[lo..hi] using auxiliary array aux[lo..hi]
@@ -139,8 +165,12 @@ public class Merge {
      * and prints them to standard output in ascending order.
      */
     public static void main(String[] args) {
-        Integer[] a = {};
-        Merge.sort(a);
-        show(a);
+        int[] a = {5,4,3,2,1};
+        int[] temp = new int[a.length];
+
+        sort(a,temp, 0, a.length-1);
+        for(int i=0; i < a.length; i++){
+            System.out.println(a[i]);
+        }
     }
 }
