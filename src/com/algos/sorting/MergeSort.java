@@ -6,60 +6,64 @@ package com.algos.sorting;
 public class MergeSort {
 
 
-    private int[] array;
-    private int[] aux;
-    private int length;
+
 
 public static void main(String[] args){
+
+    int[] arr = new int[]{1,2,3,4};
+    int[] temp = new int[arr.length];
+    sort(arr, temp, 0, arr.length - 1);
+    for(int i=0; i < arr.length; i++)
+    System.out.println(arr[i]);
+
    }
 
 
-public  void sort(int[] inArray){
-    this.array = inArray;
-    this.length = inArray.length;
-    this.aux = new int[length];
+public  static void sort(int[] arr, int[] temp, int low, int high){
+
+    if(arr == null || arr.length ==0 || high<= low)return;
+
+    int middle = (low + high)/2;
+    sort(arr, temp, low, middle);
+    sort(arr, temp, middle+1, high);
+    merge(arr, temp, low, middle, high);
 }
 
-    private void doMergeSort(int lowerIndex, int higherIndex) {
+/*
+public static void merge(int[] arr, int[] temp, int low, int middle, int high){
+    if(arr == null || arr.length ==0 || high<= low)return;
 
-        if (lowerIndex < higherIndex) {
-            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
-            // Below step sorts the left side of the array
-            doMergeSort(lowerIndex, middle);
-            // Below step sorts the right side of the array
-            doMergeSort(middle + 1, higherIndex);
-            // Now merge both sides
-            mergeParts(lowerIndex, middle, higherIndex);
-        }
+    for(int i =0; i < arr.length; i++){
+        temp[i] = arr[i];
     }
 
-    private void mergeParts(int lowerIndex, int middle, int higherIndex) {
+    int i = low , j = middle +1;
 
-        for (int i = lowerIndex; i <= higherIndex; i++) {
-            aux[i] = array[i];
+    for(int k=low; k <= high ; k++){
+        if(i > middle)             arr[k] = temp[j++];
+        else if(j > high)          arr[k] = temp[i++];
+        else if(temp[j] < temp[i]) arr[k] = temp[j++];
+        else                       arr[k] = temp[i++];
+    }
+}
+*/
+
+    public static void merge(int[] arr , int[] temp, int low, int middle, int high){
+
+        for(int i =0; i <= high; i++){
+            temp[i] = arr[i];
         }
-        int i = lowerIndex;
-        int j = middle + 1;
-        int k = lowerIndex;
-        while (i <= middle && j <= higherIndex) {
-            if (aux[i] <= aux[j]) {
-                array[k] = aux[i];
-                i++;
-            } else {
-                array[k] = aux[j];
-                j++;
-            }
-            k++;
-        }
-        while (i <= middle) {
-            array[k] = aux[i];
-            k++;
-            i++;
+
+        int i = low, j = middle + 1;
+
+        for(int k =low; k< high ; k++){
+            if(i > middle) arr[k] = temp[j++];
+            else if(j > high)   arr[k] = temp[i++];
+            else if(temp[j] < temp[i]) arr[k] = temp[j++];
+            else              arr[k] = temp[i++];
         }
 
     }
-
-    //See more at: http://java2novice.com/java-sorting-algorithms/merge-sort/#sthash.uQGL5wNe.dpuf
 
 
 

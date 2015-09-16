@@ -43,7 +43,6 @@ public class Quick {
         int j = hi + 1;
         Comparable v = a[lo];
         while (true) {
-
             // find item on lo to swap
             while (less(a[++i], v))
                 if (i == hi) break;
@@ -136,7 +135,7 @@ public class Quick {
     public static void main(String[] args) {
        // String[] a = StdIn.readAllStrings();
 
-        Integer[]a = {};
+        Integer[]a = {4,3,1,2,5};
         Quick.sort(a);
         show(a);
 
@@ -146,11 +145,11 @@ public class Quick {
         /*StdRandom.shuffle(a);*/
 
         // display results again using select
-        System.out.println();
+        /*System.out.println();
         for (int i = 0; i < a.length; i++) {
             String ith = (String) Quick.select(a, i);
             System.out.println(ith);
-        }
+        }*/
     }
 
 }
