@@ -7,18 +7,17 @@ public class BeatYourNeighbour {
 
 
     public static void main(String... args){
-        //int[] arr = {0,4,2,7,6,3,9,8,1};
-        int[] arr = {9,8,7,6,5,4,3,2,1};
-        int l = 0, r = arr.length;
+        int[] arr = {0,4,11,7,6,3,10,8,1};
+        int l = 0, r = arr.length-1;
         System.out.println(findLocalMaxima(l,r,arr));
 
     }
 
     public static int findLocalMaxima(int l, int r, int[] box){
         if(box.length ==0) return 0;
-        if(l == r) return l;
-        if(l < box.length) return r;
-        if(r > box.length) return l;
+        if(l == r) return box[l];
+        if(l <= 0) return box[r];
+        if(r >box.length-1) return box[l];
         else{
             int m = l + r/ 2;
             if(box[m] < box[m +1]){

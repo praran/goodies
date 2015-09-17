@@ -7,11 +7,13 @@ public class Anagram {
 
 
     public static void main(String... args){
-      //  System.out.println(areAnagrams("aabb","aabb"));
+       System.out.println(areAnagrams("aabba","aabba"));
 
-        System.out.println(hasDuplicates("abcdefgha".toCharArray()));
+        System.out.println(isAnagram("aabba", "bbaaa"));
 
-        System.out.println(hasDupsinArray("abcdefgha".toCharArray()));
+        //System.out.println(hasDuplicates("abcdefgha".toCharArray()));
+
+       // System.out.println(hasDupsinArray("abcdefgha".toCharArray()));
     }
 
 
@@ -88,6 +90,43 @@ public class Anagram {
        }
 
      return false;
+    }
+
+
+    public static boolean isAnagram(String s1, String s2){
+        if(s1.length() != s2.length()) return false;
+
+        int[] alphabets = new int[256];
+        int uniqueAlphabets = 0;
+        int finished=0;
+
+        for(int i=0; i< s1.length(); i++){
+            if(alphabets[s1.charAt(i)] == 0){
+                ++uniqueAlphabets;
+            }
+            ++alphabets[s1.charAt(i)];
+        }
+
+        for(int i=0; i < s2.length(); i++){
+
+            char s = s2.charAt(i);
+            if(alphabets[s] == 0){
+                return false;
+            }else {
+                --alphabets[s];
+                if(alphabets[s] ==0){
+                    ++finished;
+
+                }
+            }
+
+            if(finished == uniqueAlphabets){
+                return i == s2.length()-1;
+            }
+
+
+        }
+        return false;
     }
 }
 

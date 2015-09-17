@@ -25,10 +25,44 @@ public class QuickSort {
     public static void quickSort(int[] arr, int low, int high){
          if(low >= high) return;
 
-          int j = partiton(arr, low, high);
+          int j = part(arr, low, high);
           quickSort(arr, low, j);
           quickSort(arr, j+1, high);
 
+    }
+
+    public static int part(int[] arr, int low, int high){
+        int i=low, j = high+1;
+        int pivot = arr[low];
+        while(true){
+
+            while(arr[++i] < pivot){
+                if(i == high){
+                    break;
+                }
+            }
+
+            while(pivot <arr[--j]){
+                if (j == low)
+                    break;
+            }
+
+            if(i >= j){
+                break;
+            }
+
+            int temp = arr[j];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            // swap i and j
+        }
+
+        // swap i and j
+        int temp = arr[j];
+        arr[j] = arr[low];
+        arr[low] = temp;
+
+        return j;
     }
 
     public static void merge(int[] arr , int[] temp, int low, int middle, int high){

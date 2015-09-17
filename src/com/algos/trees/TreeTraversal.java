@@ -38,7 +38,13 @@ public class TreeTraversal {
        /* System.out.println(recHeight(node));
        itHeight(node);*/
 
-        System.out.println(findKthMinNode(node,5));
+       // System.out.println(findKthMinNode(node,5));
+        //levelOrder(node);
+//        inOrder(node);
+//
+//        inOrder3(node);
+
+        levelOrder2(node);
 
     }
 
@@ -56,6 +62,26 @@ public class TreeTraversal {
                 stack.push(curr);
                 curr = curr.left;
 
+            }
+        }
+
+    }
+
+    public static void inOrder3(Node node){
+        if (node ==null) return;
+
+        Stack<Node> stack = new Stack();
+        Node curr = node;
+
+        while(!(curr == null && stack.isEmpty())) {
+            if (curr == null) {
+                curr = stack.pop();
+                System.out.println(curr.key);
+                curr = curr.left;
+
+            } else {
+                stack.push(curr);
+                curr = curr.right;
             }
         }
 
@@ -80,12 +106,16 @@ public class TreeTraversal {
     public static void levelOrder(Node node){
         if(node == null) return;
         Queue<Node>  level = new LinkedList();
+        level.add(node);
 
         while(!level.isEmpty()){
             Node cur = level.poll();
-            System.out.println(cur.key);
-            level.add(cur.left);
-            level.add(cur.right);
+            if(cur !=null){
+                System.out.println(cur.key);
+                level.add(cur.left);
+                level.add(cur.right);
+            }
+
         }
     }
 
@@ -101,6 +131,24 @@ public class TreeTraversal {
          if(list.size()>0) levelOrder(list);
     }
 
+
+    public static void levelOrder2(Node root){
+        if (root == null) return;
+
+        Queue<Node> queue = new LinkedList();
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            Node c = queue.remove();
+            System.out.println(c.key);
+            if(c.left !=null){
+                queue.add(c.left);
+            }
+            if(c.right !=null){
+                queue.add(c.right);
+            }
+        }
+    }
 
     /**
      * Height of the tree

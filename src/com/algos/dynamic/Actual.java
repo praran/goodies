@@ -1,7 +1,6 @@
 package com.algos.dynamic;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by pradeep on 11/09/2015.
@@ -16,28 +15,29 @@ public class Actual {
 //        for(int i =0; i < arr.length; i++){
 //            System.out.println(arr[i] + ",");
 //        }
-       // printSumPairs(arr, 4);
+        printSumPairs(arr, 4);
+        printSumPair(arr,4);
        // maxSubArray(4, arr);
         int[][] matrix = new int[3][3];
         matrix[0][0] =1;
-        matrix[0][1] =3;
-        matrix[0][2] =9;
+        matrix[0][1] =1;
+        matrix[0][2] =1;
         matrix[1][0] =2;
-        matrix[1][1] =4;
-        matrix[1][2] =10;
-        matrix[2][0] =15;
-        matrix[2][1] =11;
-        matrix[2][2] = 17;
+        matrix[1][1] =1;
+        matrix[1][2] =1;
+        matrix[2][0] =1;
+        matrix[2][1] =1;
+        matrix[2][2] = 1;
 
 
 
-        System.out.println(maxField(matrix, 2, 2));
-        System.out.println(maxValue(matrix));
+       // System.out.println(maxField(matrix, 2, 2));
+       // System.out.println(maxValue(matrix));
 
-        Actual a = new Actual();
-        maxField1(matrix, 2, 2);
-        System.out.println(sum);
-        System.out.println(maxValue2(matrix));
+       // System.out.println(maxSumPair(new int[]{1,2,3,4,6,8,9}));
+
+        test2();
+
 
     }
 // http://techieme.in/find-pair-of-numbers-in-array-with-a-given-sum/
@@ -67,6 +67,43 @@ public class Actual {
             curSum += arr[i];
 
 
+        }
+
+    }
+
+
+    public static void maxsub(int[] arr, int amount){
+
+        if(arr.length == 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+        int curSum = arr[0];
+        int start =0;
+
+        for(int i=1; i< arr.length; i++){
+            while(curSum > amount && start < i-1){
+                curSum -=arr[start];
+                ++start;
+            }
+            if(curSum == amount)
+                System.out.println("found between: "+start +" and "+ (i-1));
+
+            curSum+=arr[i];
+        }
+
+    }
+
+    public static void zeroShift(int[] arr){
+        int counter = 0;
+
+        for(int i =0 ; i < arr.length ; i++){
+            if(arr[i] == 0) counter++;
+            else if(counter > 0){
+                //swap i-1 element
+                arr[i-counter] = arr[i];
+                arr[i] =0;
+            }
         }
 
     }
@@ -103,6 +140,41 @@ public class Actual {
                 pairs.put(k-input[i], input[i]);
         }
 
+    }
+
+    public static void printSumPair(int[] arr , int amount){
+        if(arr.length ==0) {
+            System.out.println("no output found");
+            return;
+        }
+
+        //int[][] table = new int[arr.length][arr.length];
+        for(int i = 0 ; i < arr.length; i++){
+            for(int j = i +1; j < arr.length; j++){
+                if(arr[i] + arr[j] == amount){
+                    System.out.println("found pairs: "+arr[i] + " and "+arr[j]);
+                }
+            }
+        }
+
+
+    }
+
+
+
+    public static int maxSumPair(int[] arr){
+        int sum =0;
+        if(arr.length ==0 ) return sum;
+
+        for(int i =0 ; i < arr.length; i++){
+            for(int j = i+1 ; j < arr.length; j++){
+                    int temp = arr[i] + arr[j];
+                    sum = (sum > temp) ? sum : temp;
+
+            }
+        }
+
+        return sum;
     }
 
     /**
@@ -169,6 +241,7 @@ public class Actual {
         int r = field.length;
         int c = field[0].length;
         int[][] maxValues = new int[r][c];
+        int count =0;
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 if (i == 0 && j == 0) {
@@ -180,8 +253,10 @@ public class Actual {
                 } else {
                     maxValues[i][j] = Math.max(maxValues[i][j-1], maxValues[i-1][j]) + field[i][j];
                 }
+                count++;
             }
         }
+        System.out.println(count);
         return maxValues[r-1][c-1];
     }
 
@@ -207,5 +282,61 @@ public class Actual {
         }
         return maxValue;
     }
+
+
+    public static void test() {
+
+        int[] start = new int[10];
+        int[] end = new int[11];
+        for (int o = 1; o < start.length; o++) {
+            for (int i = 0; i < start.length - 1; i++) {
+                if ((end[o] > start[i] && start[o] < end[i]) ||
+                        (start[o] < end[i] && end[o] > start[i]) ||
+                        (start[o] == start[i] && end[o] == end[i]))
+                    System.out.println("Event " + o + " intersect event " + (i + 1));
+
+            }
+        }
+    }
+
+    static class Pair{
+
+        int start;
+
+        int end;
+
+        Pair(int start, int end){
+            this.start = start;
+            this.end= end;
+        }
+
+        public String toString(){
+            return this.start + " to " + this.end;
+        }
+    }
+
+    public static void test2(){
+
+        Comparator<Pair> c = new Comparator<Pair>(){
+            public int compare(Pair l, Pair r){
+               if(l.start == r.start) return 0;
+                else if(l.start > r.start) return 1;
+                else   return -1;
+            }
+        };
+
+        List<Pair> list = new ArrayList();
+        list.add(new Pair(1,2));
+        list.add(new Pair(2,3));
+        list.add(new Pair(3,4));
+
+
+        list.sort(c);
+
+        for(Pair p : list){
+            System.out.println(p);
+        }
+    }
+
 
 }
